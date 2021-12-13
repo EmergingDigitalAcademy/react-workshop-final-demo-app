@@ -1,0 +1,2 @@
+export const START_DRINKING = 'START_DRINKING';
+export const END_DRINKING = 'END_DRINKING';

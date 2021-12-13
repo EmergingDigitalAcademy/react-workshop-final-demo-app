@@ -6,12 +6,16 @@ import BeerListItem from './BeerListItem';
 import {
   FETCH_BEERS
 } from '../redux/constants/beers';
+import {
+  START_DRINKING
+} from '../redux/constants/drinking';
 
 function BeerList() {
   const [beerError, setBeerError] = useState(false);
 
   const beers = useSelector(state => state.beers);
-  const loading = useSelector(state =>state.loading)
+  const loading = useSelector(state => state.loading);
+  const drinking = useSelector(state => state.drinking);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,11 +44,12 @@ function BeerList() {
   return (
     <div>
       <h1>Beer List</h1>
-      <ul>
+      <ul className={drinking ? 'drinking' : ''}>
         {beers.map(beer => (
           <BeerListItem key={beer.id} beer={beer}/>
         ))}
       </ul>
+      <button onClick={() => dispatch({ type: START_DRINKING })}>Start Drinking</button>
     </div>
   )
 }
