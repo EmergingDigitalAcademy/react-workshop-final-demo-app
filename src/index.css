@@ -6,6 +6,64 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+ul{
+  background-color: #AFF;
+}
+li{
+  background-color:#FFA;
+}
+ul :nth-child(even){
+  animation: spin2 2s infinite
+}
+ul :nth-child(odd){
+  animation: spin 2s infinite;
+  text-align: left;
+}
+@keyframes spin{
+  0%,100% {
+    transform: rotate(0deg);
+    color: red;
+  }
+  20% {
+    transform: rotate(80deg);
+    color: orange;
+  }
+  40% {
+    transform: rotate(160deg);
+    color: yellow;
+  }
+  60% {
+    transform: rotate(240deg);
+    color: #5F5;
+  }
+  80% {
+    transform: rotate(320deg);
+    color: blue;
+  }
+}
+
+@keyframes spin2{
+  100% {
+    transform: rotate(0deg);
+    color: red;
+  }
+  80% {
+    transform: rotate(60deg);
+    color: orange;
+  }
+  60% {
+    transform: rotate(120deg);
+    color: yellow;
+  }
+  40% {
+    transform: rotate(180deg);
+    color: #5F5;
+  }
+  20% {
+    transform: rotate(240deg);
+    color: blue;
+  }
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

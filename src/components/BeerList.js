@@ -1,33 +1,37 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PacmanLoader from 'react-spinners/PacmanLoader';
 import BeerListItem from './BeerListItem';
 
 function BeerList() {
-  const [beers, setBeers] = useState([]);
   const [beerError, setBeerError] = useState(false);
   const [loading, setLoading] = useState(true);
+
+  // const [beers, setBeers] = useState([]);
+  const beers = useSelector(state => state.beers);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function callApi() {
       try {
-        let beersFromTheApi = []
+        // let beersFromTheApi = []
         const response = await axios.get('https://rotatoripa.co/api/beers?per_page=10&page=1');
-        beersFromTheApi = response.data;
+        dispatch({ type: 'SET_BEERS', payload: response.data });
 
         const total = Number(response.headers.total);
         const perPage = Number(response.headers['per-page']);
 
         const pages = Math.ceil(total/perPage);
 
-        console.log(pages);
-
         for (let page = 2; page <= pages; page++) {
           const nextResponse = await axios.get(`https://rotatoripa.co/api/beers?per_page=10&page=${page}`);
-          beersFromTheApi = [...beersFromTheApi, ...nextResponse.data];
+          dispatch({ type: 'ADD_BEERS', payload: nextResponse.data });
         }
 
-        setBeers(beersFromTheApi);
+        // DISPATCH ALL THE BEERS
+        // setBeers(beersFromTheApi);
+        // dispatch({ type: 'SET_BEERS', payload: beersFromTheApi });
       } catch (error) {
         setBeerError(true);
       } finally {
