@@ -1,6 +1,16 @@
 import axios from 'axios';
 import { call, put } from 'redux-saga/effects';
 
+import {
+  SET_BEERS,
+  ADD_BEERS,
+} from '../constants/beers';
+
+import {
+  START_LOADING,
+  END_LOADING
+} from '../constants/loading';
+
 // example of using an external function call from
 // a generator, which needs to either return a promise
 // OR use the `call` wrapper
@@ -10,10 +20,10 @@ function getCeiling(decimal) {
 
 function* getBeers() {
   try {
-    yield put({ type: 'START_LOADING' });
+    yield put({ type: START_LOADING });
     const response = yield axios.get('https://rotatoripa.co/api/beers?per_page=10&page=1');
-    yield put({ type: 'SET_BEERS', payload: response.data });
-    yield put({ type: 'END_LOADING' });
+    yield put({ type: SET_BEERS, payload: response.data });
+    yield put({ type: END_LOADING });
 
     const total = Number(response.headers.total);
     const perPage = Number(response.headers['per-page']);
@@ -24,7 +34,7 @@ function* getBeers() {
 
     for (let page = 2; page <= pages; page++) {
       const nextResponse = yield axios.get(`https://rotatoripa.co/api/beers?per_page=10&page=${page}`);
-      yield put({ type: 'ADD_BEERS', payload: nextResponse.data });
+      yield put({ type: ADD_BEERS, payload: nextResponse.data });
     }
   } catch (error) {
     console.error(error);

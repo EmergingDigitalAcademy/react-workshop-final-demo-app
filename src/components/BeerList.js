@@ -1,8 +1,11 @@
-import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import PacmanLoader from 'react-spinners/PacmanLoader';
 import BeerListItem from './BeerListItem';
+
+import {
+  FETCH_BEERS
+} from '../redux/constants/beers';
 
 function BeerList() {
   const [beerError, setBeerError] = useState(false);
@@ -12,7 +15,7 @@ function BeerList() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_BEERS' });
+    dispatch({ type: FETCH_BEERS });
   }, [dispatch]);
 
   if (loading) {
