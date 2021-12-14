@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/react-workshop-final-demo-app/static/css/main.8ea599fe.chunk.css",
-    "main.js": "/react-workshop-final-demo-app/static/js/main.322e9df2.chunk.js",
-    "main.js.map": "/react-workshop-final-demo-app/static/js/main.322e9df2.chunk.js.map",
+    "main.js": "/react-workshop-final-demo-app/static/js/main.ec49c97d.chunk.js",
+    "main.js.map": "/react-workshop-final-demo-app/static/js/main.ec49c97d.chunk.js.map",
     "runtime-main.js": "/react-workshop-final-demo-app/static/js/runtime-main.7e1178ea.js",
     "runtime-main.js.map": "/react-workshop-final-demo-app/static/js/runtime-main.7e1178ea.js.map",
     "static/js/2.ef89886c.chunk.js": "/react-workshop-final-demo-app/static/js/2.ef89886c.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.7e1178ea.js",
     "static/js/2.ef89886c.chunk.js",
     "static/css/main.8ea599fe.chunk.css",
-    "static/js/main.322e9df2.chunk.js"
+    "static/js/main.ec49c97d.chunk.js"
   ]
 }
