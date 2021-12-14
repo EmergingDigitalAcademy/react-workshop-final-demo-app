@@ -6,12 +6,6 @@
   height: 40vmin;
   pointer-events: none;
 }
-.div{
-  font-family:"MS comic-sans"
-}
-@keyframes spin{
-
-}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {

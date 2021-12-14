@@ -1,52 +1,26 @@
-import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PacmanLoader from 'react-spinners/PacmanLoader';
 import BeerListItem from './BeerListItem';
 
+import {
+  FETCH_BEERS
+} from '../redux/constants/beers';
+import {
+  START_DRINKING
+} from '../redux/constants/drinking';
+
 function BeerList() {
-  const [beers, setBeers] = useState([]);
   const [beerError, setBeerError] = useState(false);
-  const [loading, setLoading] = useState(true);
+
+  const beers = useSelector(state => state.beers);
+  const loading = useSelector(state => state.loading);
+  const drinking = useSelector(state => state.drinking);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    async function callApi() {
-      try {
-        let beersFromTheApi = []
-        const response = await axios.get('https://rotatoripa.co/api/beers?per_page=10&page=1');
-        beersFromTheApi = response.data;
-
-        const total = Number(response.headers.total);
-        const perPage = Number(response.headers['per-page']);
-
-        const pages = Math.ceil(total/perPage);
-
-        console.log(pages);
-
-        for (let page = 2; page <= pages; page++) {
-          const nextResponse = await axios.get(`https://rotatoripa.co/api/beers?per_page=10&page=${page}`);
-          beersFromTheApi = [...beersFromTheApi, ...nextResponse.data];
-        }
-
-        setBeers(beersFromTheApi);
-      } catch (error) {
-        setBeerError(true);
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    callApi();
-
-    // axios.get('https://some-bogus-thing-with-no-api.stuff/api/beers').then(
-    //   (response) => {
-    //     setBeers(response.data);
-    //   }
-    // ).catch((error) => {
-    //   setBeerError(true);
-    // }).finally(() => {
-    //   setLoading(false);
-    // })
-  }, []);
+    dispatch({ type: FETCH_BEERS });
+  }, [dispatch]);
 
   if (loading) {
     return (
@@ -70,11 +44,12 @@ function BeerList() {
   return (
     <div>
       <h1>Beer List</h1>
-      <ul>
+      <ul className={drinking ? 'drinking' : ''}>
         {beers.map(beer => (
           <BeerListItem key={beer.id} beer={beer}/>
         ))}
       </ul>
+      <button onClick={() => dispatch({ type: START_DRINKING })}>Start Drinking</button>
     </div>
   )
 }
