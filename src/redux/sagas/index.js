@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import { takeEvery, takeLeading, takeLatest } from "redux-saga/effects";
 import { getBeers } from "./beers";
 

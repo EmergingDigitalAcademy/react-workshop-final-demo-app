@@ -11,6 +11,7 @@ import {
 } from '../redux/constants/drinking';
 
 function BeerList() {
+  // eslint-disable-next-line no-unused-vars
   const [beerError, setBeerError] = useState(false);
 
   const beers = useSelector(state => state.beers);
